@@ -23,9 +23,8 @@ var app = {
 		
 		var self = this;
 		this.store = new MemoryStore(function() {
-			self.showAlert('Storage Initialized', 'Info');
+			self.renderHomeView();
 		});
-		$('.search-key').on('keyup', $.proxy(this.findByName, this));
     },
 	
 	// Find employee by name
@@ -74,5 +73,16 @@ var app = {
 		} else {
 			alert(title ? (title + ": " + message) : message);
 		}
-	}
+	},
+	
+	renderHomeView: function() {
+		var insert = 
+					'<div class="header"><h1>Employee Search</h1></div>' +
+					'<div class="search-view">' + 
+					'<input class="search-key"/>' +
+					'<ul class="employee-list"></ul>' + 
+					'</div';
+		$('body').html(insert);
+		$('.search-key').on('keyup', $.proxy(this.findByName, this));
+	},
 };
